@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <h1>HI!</h1>
+
+    <img src="dogggg.png" alt="dog" width="250">
+
+    <h2>kate gpt</h2>
+
+    <div id="chatbox" style="border:1px solid black; padding:10px; width:350px; height:220px; overflow-y:scroll;">
+      <p><strong>KateBot:</strong> hi lol what is your name?</p>
+    </div>
+
+    <input id="userInput" type="text" placeholder="type here..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+      let userName = "";
+      let askedName = false;
+
+      function sendMessage() {
+        const input = document.getElementById("userInput");
+        const chatbox = document.getElementById("chatbox");
+        const message = input.value.trim();
+
+        if (message === "") return;
+
+        chatbox.innerHTML += "<p><strong>You:</strong> " + message + "</p>";
+
+        const lower = message.toLowerCase();
+        let reply;
+
+        // First message: treat it as their name
+        if (!askedName) {
+          userName = lower;
+          askedName = true;
+
+          if (lower === "sim" || lower === "simrun") {
+            reply = "hi sim! u a cs and econ major! very very cool!";
+          } else if (lower === "elizabeth") {
+            reply = "bro you better finish your sosc paper";
+          } else if (lower === "sammy") {
+            reply = "hi sammy can we make banana bread and cheesecake over the summer please";
+          } else if (lower === "diya") {
+            reply = "hi i want lucky charms";
+          } else if (lower === "michael") {
+            reply = "hi brother how come you don't post on strava anymore";
+          } else if (lower === "mom") {
+            reply = "hi mom! i miss you! wish i was at home :(";
+          } else if (lower === "dad") {
+            reply = "hi dad! thanks for booking my flight for next weekend! so excited!";
+          } else if (lower === "claire") {
+            reply = "hi claire! how is school going?";
+          } else {
+            reply = "hi " + message + " lol";
+          }
+
+        } else {
+          // After name is saved, normal chatbot responses
+          const responses = [
+            "there's no way",
+            "there's no path as such",
+            "are you serious",
+            "i wanna go home",
+            "tents"
+          ];
+
+          reply = responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        chatbox.innerHTML += "<p><strong>KateBot:</strong> " + reply + "</p>";
+
+        input.value = "";
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
